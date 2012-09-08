@@ -1,0 +1,542 @@
+* try fixed point again now that you fixed some issues with it?
+* ret rid of places where you add small deltas to vectors
+* put up new version of snake
+
+
+===================================
+Matchmaking server side logic
+===================================
+
+1) Create match (optionally with name)
+2) Join match (with name)
+3) quick match (no name... just find one)
+
+
+
+
+===================================
+DOTS
+===================================
+
+* nacl HOSTED application
+
+* google adwords for dots?
+
+* check out whats with the "signing" built into moai cloud
+
+* when inserting into matchmaking array, build the array in lua and do a pushall instead of pushing one at a time
+
+* lobby: server list, host button, join button (for specific server in list, or server by name) and "quick match" button.
+
+* handle match creation failure (show a message box when this happens)
+
+* player enters match making lobby on match creation successful
+
+* handle "get out" message
+
+* web service: open slot matchmaking queue.  one per "game" (ie dots has it's own queue).
+
+* get player matchmaking working
+
+* web service: per match message queue.  new messages returned on ping.  function to add messages (for chatting, making moves, etc)
+
+* web service: test a user going link dead.  Should put slot back into matchmaking queue when person goes LD during matchmaking? (but not regular game)
+
+* should server tell client how often to poll server?  maybe in each repsonse it says how long to wait til you poll again?  so its a server side thing instead of client side thing - easier to change
+
+* make it so all web service functions except login require userid, and handle it existing in a higher level.  Same with game?
+
+* when server sends "error" down, have it append a number, ie "error1".  Make it so when the game gets an "error<X>" message, it displays a message box saying "server error: <X>".  this way, it'll be easier to debug whats going on, knowing where the server hit an error, if not exactly why.
+
+* protect login / new account from empty username and passwords
+
+* data maintenance to kill stale matches and link dead users
+
+* make "create match" not use userid as fallback game name.  The index ought to be unique and sparse.
+
+* make indexes be created in the script instead of manually
+
+* make loading dialog be handled by web service singleton instead of by callers.
+
+* support private match.
+  * If true, all MM slots start out as private (you have to enter the game name to be able to join them)
+  * If false, all MM slots start out as public (anyone can quick match into them, or enter the game name)
+  * game host should be able to make slots private / not private while waiting.
+  * game host can kick people
+  * countdown after everyone has joined before auto-starting.
+  * time limit on making move
+  * don't create a game with a name of another game that already exists and is pending starting.
+
+* make sure loading dialogs and message boxes have a default button for enter / space / etc
+
+* rotating key on each request and user timeouts
+
+* URL encode arguments to web service?
+
+* after creating account, auto login?
+
+* better delaying of bad logins... instead of delaying just bad logins, delay people who give bad logins (even if the login is good?)
+
+* how do you "escape" / make safe, the input before putting into mongo queries
+
+* put "games" folder in main directory (not inside RTCode)
+
+* maybe buttons should be able to get focus too (via tab and click down etc...) draw a little border around the button when focused and when enter is pressed or space, press it?
+
+* script to make nacl build script (part of packing process)
+
+* static image control, to use for the background image and title image on the title screen.  built in scrolling support?
+
+* put a "forgot username or password" button on login screen?  they enter email address and it sends a reset password email.
+
+* better "create account" server side functionality.  it has concurency issues right now
+
+* games screens
+  * game list showing games waiting for players
+  * chat window / user list / chat text input box
+  * create game button
+
+* create game dialog
+  * public / private / closed slots (4 players max)
+  * checkbox for letting other people see the game invite code or not
+  * ok / cancel button
+
+* game lobby
+  * host gets direct url to game, or everyone does, if the checkbox is on
+  * show the slots and the people in there
+  * chat box / chat text input box
+  * exit lobby button
+
+* game window
+  * show each player and their color and score.  show something next to whoever is currently playing a turn.
+  * the game board
+
+* unify input events into a single call (event enum and unioned event info or something?)
+* make pretty!
+* "remember me" checkbox on title screen?
+* UI "sizers"?
+* tab order for UI
+
+===================================
+DOTS Done
+===================================
+
+* new account screen
+ * username
+ * password
+ * password confirm
+ * email address
+
+* put all ui stuff into the common ui widgets folder (on disk and in solution) and rename to "CommonUI"
+
+* get rid of internal_render... should only be render
+
+* make text buttons have a mouse down state, and make them call their callback on mouse up
+
+* be able to disable raytraced rendering (if no camera, render isnt called, but UI still gets rendered etc)
+
+* title screen
+  * BG image
+  * username / password text boxes
+  * ok button
+  * login as guest button
+  * new account button
+
+===================================
+NEXT GAME
+===================================
+
+
+chanel's scrabble after dots.  play as many letters as you want each turn so long as they are valid words?  she has details
+
+
+===================================
+Reference
+===================================
+
+http://devmaster.net/posts/raytracing-theory-implementation-part-6-textures-cameras-and-spee
+
+
+
+===================================
+HANG BUG...
+===================================
+
+I got new hangs with my attempt at fixing spurious wakeups in pthreads
+
+===================================
+MATH BUG...
+===================================
+
+32 bit (16.16) fixed point didnt work... maybe try 64 bit (32.32) or maybe something like (8.24)?
+
+tried changing floats to doubles and long doubles and had WORSE issues (even in directx!)
+
+couldn't see anything in the NaCl stuff about how to change floating point compilation stuffs.
+
+might need to try fixed point math? ):
+
+===================================
+BUGS
+===================================
+
+Mandlebrot: QUICK kill and could possibly help find the threading problem if you post the source and ask if it looks right (clean it up too)
+  * make this just set no viewport for the raytracer, so no raytracing done, all drawn directly w/ pixels.  multithreaded though!
+
+* red/blue version of mandelbrot? iterations = depth (and shade maybe?)
+
+===================================
+DOTS For Sure todo items
+===================================
+
+* get baking working? bake the board for snake and see how that goes.  two scene graphs... one for dynamic objects and one for static.
+
+* NACLE: after resizing (below) is fixed, center the element via css!
+
+* NACL: fix the resizing when chrome 18 comes out.  Put out a new snake game with the fix too!
+
+* a global header file to put stuff like the final game define and forcing to single threaded and stuff
+
+* make texture packer use zlib for faster exe loading times?  Doesnt seem to actually matter for packaged apps though...
+
+* interlaced mode for lowest quality setting? perhaps an ultra low quality settings could have interlaced
+
+* cell stats dont seem to render correctly even on directx version for some reason
+
+* make collision code, normal, aabb calculation and UV coordinates work for planes primitive
+
+* clean up primitive header (make the getuv etc functions not required / abstract?)
+
+* need sound support
+
+* DOTS vs AI
+
+* DOTS vs Player.  Moai lobby list / stats tracking.  TCP in game and chat.  Does there need to be a chat room?  And be able to invite friends?
+
+* save / load settings (username, password(?), resolution, sound volume)
+
+* maybe make it so no objects are created at "run time" for dots.  Have all the objects there, but "invisible" (no refraction index, no color absorbed), and make them visible when they are needed
+
+* render game board to "viewport"? so it's easier to place UI around scenes, and we dont have to rely on the caching stuff to not update the stuff hidden by UI
+
+* make something where if your frame rate is too low, it auto-turns down settings til it's running ok, and tells the user about it (maybe a setting to allow it to auto down tune?)
+
+* ads? greystripe (what words uses...) or tapjoy perhaps
+
+* profile a scene that is doing only the "cheap" rendering to see where the slowdown is in that situation
+
+* NACL: decreasing active threads in menu doesnt seem to actually work
+
+* NACLE CRASH: launch snake, m00f, toggle fps on, then off, then click largest setting of screen
+
+===================================
+Want to do but not totally necesary
+===================================
+
+* could do "dirty rect" stuff for the UI instead of copying the buffer over every time.
+
+* clean up NACL code to remove references of "pong" etc
+
+* for directx AND nacl: render another frame while waiting for copy??  I think it spends a lil while waiting sometimes...
+
+* make a singleton registration thing that controls order of construction / destruction.  CTextureManager::FreeTexture has a hack around because of this problem.
+
+* try GDI instead of directx for the windows platform.  If it works well, get rid of directx and replace it.  less dependancies.
+
+* when drawing a texture on the ui stack make checks to make sure it doesnt draw out of bounds.
+
+* pass flags to rendering textures / sampling textures?  bilinear filter or no?  alpha blend or no?
+
+* generalized font system instead of just a single font loaded.  embed the .ini files in the exe too
+
+* have each ray keep track of the last X number of primitives tested that frame.
+
+* make a way to debug the ray where the mouse is
+
+* N-plane primitive
+
+* get photon mapping book
+
+* make CPrimitiveComposite::GetAABB() smarter about AABB calculation, based on operation.
+
+* get rid of reverse iterators and use an actual reverse for loop instead for the safety stuff
+
+* make the fps display have an "averaged" fps thats the average of the last second or something
+
+* 2 pixel border width for 3d shaded boxes instead of 1
+
+* handle refraction with triangles somehow, or get rid of triangles?  calculations like i have them now don't handle triangles.  Maybe more complex hierchical primitives?
+  * replace triangles with a primitive that you can give N number of planes to describe the shape.
+
+* set texture mode: clamp, wrap, mirror
+
+* make it so you specify # of divisions on each axis, instead of cell size for world grid.  Easier to manage and maintain
+
+* a way to visualize the ray where the mouse cursor is... show it bounce around to all the places it goes.  Color code the lines based on what they mean... reflections, light shadow test, etc
+
+* make it so you can set attenuation parameters of lighting
+
+* Debug menu options...
+  * toggle pixel caching
+  * toggle ray caching
+
+* GetCellExtentsForAABB is overzealous, it pulls too many cells sometimes
+
+* toggle vsync: helps with profiling
+
+* keep the surface locked for as short a time as possible... render to pixel buffer before locking surface
+
+* Move 2d rendering stuff out of the UISheet code into it's own thing (2d context?)
+
+* make it so stuff isnt rendered underneath the UI (and if a hidden cell is dirty, make it stay dirty til the UI is unhidden?)
+
+* replace 0 with NULL for use with pointers.  make a global define header if needed
+
+* maybe grid should be "screen space grid" instead of world.  Since we aren't going to move the camera, might as well optimize it if this helps.  Unfortunately the ray tracing likes the AABB to traverse though... might need 2 3d world "grids", one is the one we have now, the other is the pixel "shafts".  objects mark up both grids? Maybe a way to do this if you force the camera to be axis aligned?
+
+* instead of using -1 everywhere for invalid ray index, make a constant or define for it
+
+* when on exact boundaries, bad stuff happens. (ie set camera to be at 0,0,-15)
+
+* perspective correction: better quality rays
+
+* combine main.cpp and the directx platform into a single file?
+
+* clean up directx driver program
+
+* be able to change resolution at run time
+
+* make it so the scene doesn't hold any camera specific info (like screen cell visitors) so it's easier for multiple cameras to view the same scene etc.
+
+* when changing the camera on the ray tracer, don't necesarily need to mark the camera as completely dirty, just need to copy over the pixels or something. (the "clean" screen nodes weren't getting updated so they show the info from the last scene)
+
+* rotation of primitives
+
+* does UI render above debug stuff? if so should probably fix that (somehow??)
+
+* make it so if textures are off, that changing texture stuff doesn't dirty the cache (and same for other features).  Did this for textures but other features need treatment.
+
+* a setting to specify if reflections are multiplied by the diffuse color or not (maybe a value from 0 to 1?)  Maybe instead, make it so everything has a color assocated with it (refraction and reflection, etc).  Could make these come from colors or textures or both, or functions.  Make "materials" generalized
+
+* improve the camera rays: http://www.unknownroad.com/rtfm/graphics/rt_eyerays.html.  Tried it, no luck.  Even tried lengethening the vector to hit the plane but no luck.
+
+* dont include "context switching" as part of game time updates?
+
+* for shadows have 3 options: off, black/white only, colored
+
+===================================
+Fun Ideas and features
+===================================
+
+* side by side 3d
+
+* depth of field?  a fake way might come from how the red/blue 3d stuff works.  if you look at it without glasses, the "look at" point has the red and blue being the same.  in front or behind that, they are offset and "blurrier" like a focus point.  might be something to that.
+
+* 2 scene graphs.  Use the current grid for dynamic objects, KD tree or something for static objects.  Possibly also do something like so long as the camera doesnt move, primary rays can cache their first static geometry hit, and use that as a "max distance" when searching the grid.  If the max distance is reached, use the cached static intersection.
+
+* primitive orienter object... scale, translation, rotation.  It has a child primitive, and puts the ray into the object's space before doing the testing, so that any arbitrary primitive can be oriented.  Having an OBB etc is probably more efficient for simple spahes, but composite shapes, mathematically defined shapes, and plane based shapes make it more difficult.
+
+* mathematically defined shapes (the user specifies a function pointer that supplies everything needed)
+
+* play around with mathematically defined shapes!
+
+* flags for whether objects receive and cast shadows.  If an object doesn't receive a shadow, don't do a ray cast from the surface to a light, assume nothing is in the way.  if something is marked not to cast a shadow, ignore it when doing the ray test from surface to light
+
+* directional lights
+
+* spot lights
+
+* diffuse reflections
+
+* texture sampler: let put U, V coordinates through bias / gain?
+
+* Ortho Scrolling:  Have a screen grid larger than the screen by at least a few layers of cells.  As the screen scrolls, you can offset the graphics.  When a full cell has been scrolled, shift cell contents around.  Each time a render happens, do a couple extra for the cells off screen to help scrolling out.
+
+* red / blue 3d glasses mode, working like it works in the HTML5 version
+
+* "Composite shapes".  They have 2 children, which are either simple prims or other composite shapes.  AND:  the shape is the intersection of the 2 children.  OR: the shape is the union of the 2 children.  NOT:  subtract shape 2 frmo shape 1.  XOR: Remove all overlap between the shapes.  Use this to make more complex models
+
+* orthographic projection support.  try and take advantage of how panning the camera doesn't need to invalidate as much data.
+
+* black and white rendering / sepia?  Could let the "game code" register some kind of shader function.  It gets passed the pixel color, the ray distance, and maybe ray contact normal, and it returns what the ray color should be.
+
+* oct tree to help deal with the empty grid squares?
+
+* emissive lighting
+
+* be able to specify textures to modify things such as reflectiveness, refractiveness, refractive index and reflection ray deviance, per pixel light coloring
+
+* bump maps
+
+* soft shadows - do multiple ray casts at a light and average (monte carlo sampling)
+
+* investigate the benefits of ortho projection.  Such as being able to scroll the camera and being able to shift cached info over.
+
+* screen space effects? could use depth info to help
+
+* interlaced mode
+
+* dispersion (prism effect).  Ideas for implementation:
+  * specify different refractive indexes per R,G,B channel.  shoot one ray per each and mix the results. (http://www.mentis.ca/design/graphics/dispersion/)
+  * alter the "light absorption" per ray based on some sort of math to make the light come through "prismatically"
+
+* try refracting the refraction rays perpendicular to how they do it now (or some other direction) to see how it looks.
+
+* Portals could be implemented by assigning a scene/camera/imagebuffer as a texture to another object (like a rectangle - but could be a sphere or triangle or any other shape too).  
+
+* animate rays (screen rays and others) for cool effects such as heat waves, being underwater, etc.  Probably too expensive to do full screen unfortunately.
+
+* look into fractal rendering stuff.  IFS and non IFS
+
+* specify a texture to be the camera's rays.  r,g,b = x,y,z like a bumpmap
+
+* skeletal animation.  Stick shapes onto bones (like cylinders i guess).  Could maybe also mix this with nurb type stuff and have flexi objects on the bones and such.
+
+* make some kind of data format for scenes, objects, models, animated paths etc.  javascript? JSON?
+
+* Do something like make everything sepia / black and white except for specific objects.  The objects could have flags on them for this purpose and the conversion could happen after gathering all colors for a pixel? (or would it be better to see it reflected etc off of other objects?)
+
+* subsurface scattering?
+
+* mandlebrot procedural texture
+
+* procedural UV function for shapes.  It passes the primitive and X,Y,Z, you return a U and a V.  Or... maybe procedural texture function gets passed the primitive and X,Y,Z pos as well so it can do what it wants with the data given?
+
+* make a way for procedural textures to say that they dirty the pixels (ie if they are animated over time, they can return a value to indicate that the pixel clean flag should not be set - or should be cleared - post rendering)
+
+* have some settings for lens distortion - like fish eye lens and such
+
+* render during vsync instead of having main thread always hang out.  would probably need to cache data from last frame.
+
+===================================
+NACL publishing info
+===================================
+
+*how to distribute app: https://developers.google.com/native-client/devguide/distributing
+  * http://code.google.com/chrome/webstore/docs/get_started_simple.html
+
+===================================
+Other platforms
+===================================
+
+* CUDA
+
+* Google native apps version - with a javascript interface so people can script objects and such?
+
+* web cl
+
+* "Screenshot" platform - makes a single screenshot and exits.
+* "Video" platform
+
+* Release Games on DirectX / GDI platform on Steam!
+
+===================================
+Game Ideas
+===================================
+
+* chanel's words game
+
+* build your own side scroller, play other people's.  single and multiplayer?
+
+* build your own dungeon, link w/ friends dungeons. single and multiplayer?
+
+* drod
+
+* wonderput
+
+* putt base http://armorgames.com/play/13169/putt-base
+
+* a learn to fly type game
+
+* iso ball: puzzle where you place peices on a single screen board, then press play and a ball rolls from a spawner and you try to get it into the cup.
+
+* study more info about chromosomes and DNA and do some kinda game based on programming biology
+
+* PINBALL!  bake out the static scene's rays, and when rendering, at each ray, check to see if there's a dynamic object closer than the static stuff.  GET CHRIS TO HELP DESIGN IT
+
+* tron if can do web sockets or something.... need real time networking if multiplayer.  maybe single player?
+
+* combine card drawing elements type game with a tower defense?  maybe multiplayer (1v1,2v2,3v3,4v4).  some cards summon, some cards create towers, mana pool, etc
+
+* minigolf (static camera at each shot w/ animated objects and such)
+
+* pool
+
+* fracum - http://armorgames.com/play/13222/fracuum
+
+* minigolf / pool game?? pool with windmills and strangely shaped pool tables and such?
+
+* Zelda 1 style game.  fixed camera on each screen... yay!
+
+* Chess, checkers, dots, battleship, tic tac toe, pool.  Reflective peices and board, scrolling skybox image (can turn on / off).  static camera of game board
+
+* arkanoid / break out type game
+
+* side scrolling platformer w/ fixed camera per screen.  could do stuff like have bottles in the foreground that distort the objects and the player as they walk behind it.
+
+* Ortho mode games: side scrolling game or top down view scrolling game.
+
+* Faked movement games: starfox w/ scrolling textures and moving world geometry but fixed camera
+
+* point / click adventure.  fixed camera on each screen with objects moving around in the scene.  Maniac mansion, day of the tentacle, monkey island, etc.
+
+* multi viewport game: play as a security guard and you have security cameras?  only stuff moving in one viewport at a time?  or having small cameras showing "previews" that you can zoom in on.
+
+* magnifying glass game: dunno... look for clues in a room or something?  maybe a first person point and click detective game.  maybe special lenses to see other things.  paranormal detective game?
+
+* optics game: puzzle game involving lasers?
+
+* lunar lander :P
+
+* "dibbles"? http://armorgames.com/play/12701/dibbles-2-winter-woes
+  * other flash games that dont scroll the screen or change camera angles
+    * "home sheep home" http://armorgames.com/play/12700/home-sheep-home-2
+    * Tower defense?
+    * puzzle game
+    * physics games
+    * "launch games" -> scrolling background texture, "fake" motion: http://armorgames.com/play/12712/rocket-santa
+
+* tile swap puzzle game
+
+* star rider: http://www.youtube.com/watch?v=m7z25MrF1hk&feature=related
+
+* scorched earth type game
+
+* mountain bike game
+
+* "solar" top down view fly through space exploration rpg
+
+* marble madness - ortho scroll that shiz!
+
+* asynch gameplay overhead view space game?  maybe you get so many units to build levels (or diff #s of units declare difficulty or something).  Build levels, play other levels, watch replays of people beating your levels.
+
+===================================
+Perf stuff
+===================================
+
+* Shadows are expensive cause they affect a lot of cells and pixels (well, move objects away from light, maybe that'll help!)
+
+* Move camera away from objects and things aren't bad!
+
+
+===================================
+Lighting Details
+===================================
+
+If no hit or too many bounces, use background color
+
+else...
+
+color = ambient light
+
+if primitive refractive
+  Refracted color = recurse
+  Light Absorbance = based on ray distance traveled through object
+  color += Refracted Color * Light Absorbance * Refractiveness
+
+if primitive reflective
+  Reflected color = recurse
+  color += Reflected Color * Reflectiveness  (* diffuse color at point?)
+
+Color += Diffuse color from each light, shaded by refractive objects between point and light * Diffuseness
+Color += Specular color from each light, shaded by refractive objects between point and light * Specularness

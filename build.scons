@@ -1,0 +1,73 @@
+#! -*- python -*-
+#
+# Copyright (c) 2011 The Native Client Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import make_nacl_env
+import os
+
+nacl_env = make_nacl_env.NaClEnvironment(
+    use_c_plus_plus_libs=True, nacl_platform=os.getenv('NACL_TARGET_PLATFORM'))
+nacl_env.Append(
+    # Add a CPPPATH that enables the full-path #include directives, such as
+    # #include "examples/sine_synth/sine_synth.h"
+    #CPPPATH=[os.path.dirname(os.path.dirname(os.getcwd()))],
+    CPPPATH=["C:/Users/Atrix256/Desktop/project1/RayTracer/"],
+    # Strict ANSI compliance.
+    EXTRA_CCFLAGS=['-pedantic'],
+   )
+
+sources = ['PlatformNACL/pong.cc',
+		   'PlatformNACL/PlatformNaCl.cpp',
+		   'PackedTextures.cpp',
+		   'RTCode/AABB.cpp',
+		   'RTCode/Camera.cpp',
+		   'RTCode/CameraManager.cpp',		
+		   'RTCode/DebugMenu.cpp',		      
+		   'RTCode/Game.cpp',		   
+		   'RTCode/GameBase.cpp',		   		   
+		   'RTCode/PlatformBase.cpp',
+		   'RTCode/PrimitiveBase.cpp',
+		   'RTCode/PrimitiveBox.cpp',
+		   'RTCode/PrimitiveComposite.cpp',
+		   'RTCode/PrimitivePlanes.cpp',
+		   'RTCode/PrimitiveSphere.cpp',
+		   'RTCode/PrimitiveTriangle.cpp',
+		   'RTCode/Ray.cpp',
+		   'RTCode/RayCache.cpp',
+		   'RTCode/RayTracer.cpp',
+		   'RTCode/RTMath.cpp',
+		   'RTCode/Scene.cpp',
+		   'RTCode/SceneManager.cpp',
+		   'RTCode/ScreenCell.cpp',
+		   'RTCode/ScreenGrid.cpp',
+		   'RTCode/Texture.cpp',
+		   'RTCode/TextureManager.cpp',
+		   'RTCode/Vec3.cpp',
+		   'RTCode/WorldCell.cpp',		   
+		   'RTCode/CommonUI/UIControl.cpp',
+		   'RTCode/CommonUI/UIControl_TextButton.cpp',
+		   'RTCode/CommonUI/UIControl_ImageButton.cpp',
+		   'RTCode/CommonUI/UISheet.cpp',
+		   'RTCode/CommonUI/UISheet_Menu.cpp',
+		   'RTCode/CommonUI/UIStack.cpp',
+		   'RTCode/CommonUI/StaticText.cpp',		   
+		   'RTCode/CommonUI/MessageBox.cpp',		   
+		   'RTCode/CommonUI/Dialog.cpp',		   
+		   'RTCode/Games/Breakout/Game_Breakout.cpp',
+		   'RTCode/Games/Dots/Game_Dots.cpp',
+		   'RTCode/Games/Dots/UISheet_GameUI.cpp',
+		   'RTCode/Games/Dots/UISheet_MainMenu.cpp',
+		   'RTCode/Games/Snake/Game_Snake.cpp',
+		   'RTCode/Games/Snake/UISheet_SnakeGameUI.cpp',
+		   'RTCode/Games/Snake/UISheet_SnakeIntroUI.cpp',
+		   'RTCode/Games/Snake/UISheet_Lost.cpp',
+		   'RTCode/Games/Tests/TestGames.cpp'
+		   ]
+
+nacl_env.AllNaClModules(sources, 'morirt')
+
+# This target is used by the SDK build system to provide a prebuilt version
+# of the example in the SDK installer.
+nacl_env.InstallPrebuilt('morirt')

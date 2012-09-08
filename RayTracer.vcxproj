@@ -1,0 +1,301 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="ReleaseUnoptimized|Win32">
+      <Configuration>ReleaseUnoptimized</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{730137F5-C4D0-4E42-AFC5-0C8E38ADE26E}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>RayTracer</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseUnoptimized|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseUnoptimized|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(DXSDK_DIR)include;PlatformDirectX\libcurl\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(DXSDK_DIR)lib/x86;$(LibraryPath);PlatformDirectX\libcurl\</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(DXSDK_DIR)include;PlatformDirectX\libcurl\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(DXSDK_DIR)lib/x86;$(LibraryPath);PlatformDirectX\libcurl\</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseUnoptimized|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(DXSDK_DIR)include;PlatformDirectX\libcurl\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(DXSDK_DIR)lib/x86;$(LibraryPath);PlatformDirectX\libcurl\</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>libcurl_imp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <FloatingPointModel>Precise</FloatingPointModel>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>libcurl_imp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseUnoptimized|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>Disabled</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <FloatingPointModel>Precise</FloatingPointModel>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>libcurl_imp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="PackedTextures.cpp" />
+    <ClCompile Include="PlatformDirectX\LibcurlHTTP.cpp" />
+    <ClCompile Include="PlatformDirectX\main.cpp" />
+    <ClCompile Include="PlatformDirectX\PlatformDirectX.cpp" />
+    <ClCompile Include="PlatformNACL\geturl_handler.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseUnoptimized|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="PlatformNACL\NaClHTTP.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseUnoptimized|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="PlatformNACL\PlatformNaCl.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseUnoptimized|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="PlatformNACL\pong.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseUnoptimized|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="RTCode\AABB.cpp" />
+    <ClCompile Include="RTCode\Camera.cpp" />
+    <ClCompile Include="RTCode\CameraManager.cpp" />
+    <ClCompile Include="RTCode\CommonUI\Dialog.cpp" />
+    <ClCompile Include="RTCode\CommonUI\MessageBox.cpp" />
+    <ClCompile Include="RTCode\CommonUI\StaticText.cpp" />
+    <ClCompile Include="RTCode\CommonUI\TextBox.cpp" />
+    <ClCompile Include="RTCode\CommonUI\UIControl.cpp" />
+    <ClCompile Include="RTCode\CommonUI\UIControl_ImageButton.cpp" />
+    <ClCompile Include="RTCode\CommonUI\UIControl_TextButton.cpp" />
+    <ClCompile Include="RTCode\CommonUI\UISheet.cpp" />
+    <ClCompile Include="RTCode\CommonUI\UISheet_Loading.cpp" />
+    <ClCompile Include="RTCode\CommonUI\UISheet_Menu.cpp" />
+    <ClCompile Include="RTCode\CommonUI\UIStack.cpp" />
+    <ClCompile Include="RTCode\DebugMenu.cpp" />
+    <ClCompile Include="RTCode\FixedPoint.cpp" />
+    <ClCompile Include="RTCode\Game.cpp" />
+    <ClCompile Include="RTCode\GameBase.cpp" />
+    <ClCompile Include="RTCode\Games\Breakout\Game_Breakout.cpp" />
+    <ClCompile Include="RTCode\Games\Dots2d\Game_Dots2d.cpp" />
+    <ClCompile Include="RTCode\Games\Dots2d\NewAccountDialog.cpp" />
+    <ClCompile Include="RTCode\Games\Dots2d\ResetPasswordDialog.cpp" />
+    <ClCompile Include="RTCode\Games\Dots2d\UISheet_Dots2dBG.cpp" />
+    <ClCompile Include="RTCode\Games\Dots2d\UISheet_Dots2dGameUI.cpp" />
+    <ClCompile Include="RTCode\Games\Dots2d\UISheet_Dots2dLobby.cpp" />
+    <ClCompile Include="RTCode\Games\Dots2d\UISheet_Dots2dTitle.cpp" />
+    <ClCompile Include="RTCode\Games\Dots\Game_Dots.cpp" />
+    <ClCompile Include="RTCode\Games\Dots\UISheet_GameUI.cpp" />
+    <ClCompile Include="RTCode\Games\Dots\UISheet_MainMenu.cpp" />
+    <ClCompile Include="RTCode\Games\Mandelbrot\Game_Mandelbrot.cpp" />
+    <ClCompile Include="RTCode\Games\Mandelbrot\UISheet_Mandelbrot.cpp" />
+    <ClCompile Include="RTCode\Games\Snake\Game_Snake.cpp" />
+    <ClCompile Include="RTCode\Games\Snake\UISheet_Lost.cpp" />
+    <ClCompile Include="RTCode\Games\Snake\UISheet_SnakeGameUI.cpp" />
+    <ClCompile Include="RTCode\Games\Snake\UISheet_SnakeIntroUI.cpp" />
+    <ClCompile Include="RTCode\Games\Tests\TestGames.cpp" />
+    <ClCompile Include="RTCode\PlatformBase.cpp" />
+    <ClCompile Include="RTCode\PrimitiveBase.cpp" />
+    <ClCompile Include="RTCode\PrimitiveBox.cpp" />
+    <ClCompile Include="RTCode\PrimitiveComposite.cpp" />
+    <ClCompile Include="RTCode\PrimitivePlanes.cpp" />
+    <ClCompile Include="RTCode\PrimitiveSphere.cpp" />
+    <ClCompile Include="RTCode\PrimitiveTriangle.cpp" />
+    <ClCompile Include="RTCode\Ray.cpp" />
+    <ClCompile Include="RTCode\RayCache.cpp" />
+    <ClCompile Include="RTCode\RayTracer.cpp" />
+    <ClCompile Include="RTCode\RTMath.cpp" />
+    <ClCompile Include="RTCode\Scene.cpp" />
+    <ClCompile Include="RTCode\SceneManager.cpp" />
+    <ClCompile Include="RTCode\ScreenCell.cpp" />
+    <ClCompile Include="RTCode\ScreenGrid.cpp" />
+    <ClCompile Include="RTCode\Texture.cpp" />
+    <ClCompile Include="RTCode\TextureManager.cpp" />
+    <ClCompile Include="RTCode\Vec3.cpp" />
+    <ClCompile Include="RTCode\WebService.cpp" />
+    <ClCompile Include="RTCode\WorldCell.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="PackedTextures.h" />
+    <ClInclude Include="PlatformDirectX\LibcurlHTTP.h" />
+    <ClInclude Include="PlatformDirectX\PlatformDirectX.h" />
+    <ClInclude Include="PlatformNACL\geturl_handler.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseUnoptimized|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="PlatformNACL\NaClHTTP.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseUnoptimized|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="PlatformNACL\PlatformNaCl.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseUnoptimized|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="PlatformNACL\pong.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseUnoptimized|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="RTCode\AABB.h" />
+    <ClInclude Include="RTCode\Callback.h" />
+    <ClInclude Include="RTCode\Camera.h" />
+    <ClInclude Include="RTCode\CameraManager.h" />
+    <ClInclude Include="RTCode\CollisionInfo.h" />
+    <ClInclude Include="RTCode\CommonUI\Dialog.h" />
+    <ClInclude Include="RTCode\CommonUI\MessageBox.h" />
+    <ClInclude Include="RTCode\CommonUI\StaticText.h" />
+    <ClInclude Include="RTCode\CommonUI\TextBox.h" />
+    <ClInclude Include="RTCode\CommonUI\UIControl.h" />
+    <ClInclude Include="RTCode\CommonUI\UIControl_ImageButton.h" />
+    <ClInclude Include="RTCode\CommonUI\UIControl_TextButton.h" />
+    <ClInclude Include="RTCode\CommonUI\UISheet.h" />
+    <ClInclude Include="RTCode\CommonUI\UISheet_Loading.h" />
+    <ClInclude Include="RTCode\CommonUI\UISheet_Menu.h" />
+    <ClInclude Include="RTCode\CommonUI\UIStack.h" />
+    <ClInclude Include="RTCode\DebugMenu.h" />
+    <ClInclude Include="RTCode\Defines.h" />
+    <ClInclude Include="RTCode\FixedPoint.h" />
+    <ClInclude Include="RTCode\FloatingPointExceptions.h" />
+    <ClInclude Include="RTCode\Game.h" />
+    <ClInclude Include="RTCode\GameBase.h" />
+    <ClInclude Include="RTCode\Games\Breakout\Game_Breakout.h" />
+    <ClInclude Include="RTCode\Games\Dots2d\Game_Dots2d.h" />
+    <ClInclude Include="RTCode\Games\Dots2d\NewAccountDialog.h" />
+    <ClInclude Include="RTCode\Games\Dots2d\ResetPasswordDialog.h" />
+    <ClInclude Include="RTCode\Games\Dots2d\UISheet_Dots2dBG.h" />
+    <ClInclude Include="RTCode\Games\Dots2d\UISheet_Dots2dGameUI.h" />
+    <ClInclude Include="RTCode\Games\Dots2d\UISheet_Dots2dLobby.h" />
+    <ClInclude Include="RTCode\Games\Dots2d\UISheet_Dots2dTitle.h" />
+    <ClInclude Include="RTCode\Games\Dots\Game_Dots.h" />
+    <ClInclude Include="RTCode\Games\Dots\UISheet_GameUI.h" />
+    <ClInclude Include="RTCode\Games\Dots\UISheet_MainMenu.h" />
+    <ClInclude Include="RTCode\Games\Mandelbrot\Game_Mandelbrot.h" />
+    <ClInclude Include="RTCode\Games\Mandelbrot\UISheet_Mandelbrot.h" />
+    <ClInclude Include="RTCode\Games\Snake\Game_Snake.h" />
+    <ClInclude Include="RTCode\Games\Snake\UISheet_Lost.h" />
+    <ClInclude Include="RTCode\Games\Snake\UISheet_SnakeGameUI.h" />
+    <ClInclude Include="RTCode\Games\Snake\UISheet_SnakeIntroUI.h" />
+    <ClInclude Include="RTCode\Games\Tests\TestGames.h" />
+    <ClInclude Include="RTCode\List.h" />
+    <ClInclude Include="RTCode\Matrix.h" />
+    <ClInclude Include="RTCode\ObjectPool.h" />
+    <ClInclude Include="RTCode\PlatformBase.h" />
+    <ClInclude Include="RTCode\PrimitiveBase.h" />
+    <ClInclude Include="RTCode\PrimitiveBox.h" />
+    <ClInclude Include="RTCode\PrimitiveComposite.h" />
+    <ClInclude Include="RTCode\PrimitivePlanes.h" />
+    <ClInclude Include="RTCode\PrimitiveSphere.h" />
+    <ClInclude Include="RTCode\PrimitiveTriangle.h" />
+    <ClInclude Include="RTCode\Ray.h" />
+    <ClInclude Include="RTCode\RayCache.h" />
+    <ClInclude Include="RTCode\RayTracer.h" />
+    <ClInclude Include="RTCode\RTMath.h" />
+    <ClInclude Include="RTCode\Scene.h" />
+    <ClInclude Include="RTCode\SceneManager.h" />
+    <ClInclude Include="RTCode\ScreenCell.h" />
+    <ClInclude Include="RTCode\ScreenGrid.h" />
+    <ClInclude Include="RTCode\StringBuffer.h" />
+    <ClInclude Include="RTCode\Texture.h" />
+    <ClInclude Include="RTCode\TextureManager.h" />
+    <ClInclude Include="RTCode\Vec3.h" />
+    <ClInclude Include="RTCode\WebService.h" />
+    <ClInclude Include="RTCode\WorldCell.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PlatformNACL\pong.html">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseUnoptimized|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </None>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

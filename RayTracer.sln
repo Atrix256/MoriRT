@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C++ Express 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RayTracer", "RayTracer.vcxproj", "{730137F5-C4D0-4E42-AFC5-0C8E38ADE26E}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TexturePacker", "TexturePacker\TexturePacker.vcxproj", "{91048B3D-4BA0-4FB4-B58A-A8597EC01946}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+		ReleaseUnoptimized|Win32 = ReleaseUnoptimized|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{730137F5-C4D0-4E42-AFC5-0C8E38ADE26E}.Debug|Win32.ActiveCfg = Debug|Win32
+		{730137F5-C4D0-4E42-AFC5-0C8E38ADE26E}.Debug|Win32.Build.0 = Debug|Win32
+		{730137F5-C4D0-4E42-AFC5-0C8E38ADE26E}.Release|Win32.ActiveCfg = Release|Win32
+		{730137F5-C4D0-4E42-AFC5-0C8E38ADE26E}.Release|Win32.Build.0 = Release|Win32
+		{730137F5-C4D0-4E42-AFC5-0C8E38ADE26E}.ReleaseUnoptimized|Win32.ActiveCfg = ReleaseUnoptimized|Win32
+		{730137F5-C4D0-4E42-AFC5-0C8E38ADE26E}.ReleaseUnoptimized|Win32.Build.0 = ReleaseUnoptimized|Win32
+		{91048B3D-4BA0-4FB4-B58A-A8597EC01946}.Debug|Win32.ActiveCfg = Debug|Win32
+		{91048B3D-4BA0-4FB4-B58A-A8597EC01946}.Debug|Win32.Build.0 = Debug|Win32
+		{91048B3D-4BA0-4FB4-B58A-A8597EC01946}.Release|Win32.ActiveCfg = Release|Win32
+		{91048B3D-4BA0-4FB4-B58A-A8597EC01946}.Release|Win32.Build.0 = Release|Win32
+		{91048B3D-4BA0-4FB4-B58A-A8597EC01946}.ReleaseUnoptimized|Win32.ActiveCfg = Release|Win32
+		{91048B3D-4BA0-4FB4-B58A-A8597EC01946}.ReleaseUnoptimized|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,452 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="RTCode\Games\Dots\Game_Dots.cpp">
+      <Filter>Games\DotsGame</Filter>
+    </ClCompile>
+    <ClCompile Include="RTCode\AABB.cpp">
+      <Filter>RTCode</Filter>
+    </ClCompile>
+    <ClCompile Include="RTCode\Camera.cpp">
+      <Filter>RTCode</Filter>
+    </ClCompile>
+    <ClCompile Include="RTCode\CameraManager.cpp">
+      <Filter>RTCode</Filter>
+    </ClCompile>
+    <ClCompile Include="RTCode\DebugMenu.cpp">
+      <Filter>RTCode</Filter>
+    </ClCompile>
+    <ClCompile Include="RTCode\Game.cpp">
+      <Filter>RTCode</Filter>
+    </ClCompile>
+    <ClCompile Include="RTCode\PlatformBase.cpp">
+      <Filter>RTCode</Filter>
+    </ClCompile>
+    <ClCompile Include="RTCode\PrimitiveBase.cpp">
+      <Filter>RTCode</Filter>
+    </ClCompile>
+    <ClCompile Include="RTCode\PrimitiveBox.cpp">
+      <Filter>RTCode</Filter>
+    </ClCompile>
+    <ClCompile Include="RTCode\PrimitiveSphere.cpp">
+      <Filter>RTCode</Filter>
+    </ClCompile>
+    <ClCompile Include="RTCode\PrimitiveTriangle.cpp">
+      <Filter>RTCode</Filter>
+    </ClCompile>
+    <ClCompile Include="RTCode\Ray.cpp">
+      <Filter>RTCode</Filter>
+    </ClCompile>
+    <ClCompile Include="RTCode\RayCache.cpp">
+      <Filter>RTCode</Filter>
+    </ClCompile>
+    <ClCompile Include="RTCode\RayTracer.cpp">
+      <Filter>RTCode</Filter>
+    </ClCompile>
+    <ClCompile Include="RTCode\RTMath.cpp">
+      <Filter>RTCode</Filter>
+    </ClCompile>
+    <ClCompile Include="RTCode\Scene.cpp">
+      <Filter>RTCode</Filter>
+    </ClCompile>
+    <ClCompile Include="RTCode\SceneManager.cpp">
+      <Filter>RTCode</Filter>
+    </ClCompile>
+    <ClCompile Include="RTCode\ScreenCell.cpp">
+      <Filter>RTCode</Filter>
+    </ClCompile>
+    <ClCompile Include="RTCode\ScreenGrid.cpp">
+      <Filter>RTCode</Filter>
+    </ClCompile>
+    <ClCompile Include="RTCode\Texture.cpp">
+      <Filter>RTCode</Filter>
+    </ClCompile>
+    <ClCompile Include="RTCode\TextureManager.cpp">
+      <Filter>RTCode</Filter>
+    </ClCompile>
+    <ClCompile Include="RTCode\Vec3.cpp">
+      <Filter>RTCode</Filter>
+    </ClCompile>
+    <ClCompile Include="RTCode\WorldCell.cpp">
+      <Filter>RTCode</Filter>
+    </ClCompile>
+    <ClCompile Include="RTCode\Games\Dots\UISheet_GameUI.cpp">
+      <Filter>Games\DotsGame</Filter>
+    </ClCompile>
+    <ClCompile Include="RTCode\Games\Breakout\Game_Breakout.cpp">
+      <Filter>Games\BreakoutGame</Filter>
+    </ClCompile>
+    <ClCompile Include="RTCode\GameBase.cpp">
+      <Filter>RTCode</Filter>
+    </ClCompile>
+    <ClCompile Include="RTCode\Games\Tests\TestGames.cpp">
+      <Filter>Games\TestGames</Filter>
+    </ClCompile>
+    <ClCompile Include="RTCode\Games\Dots\UISheet_MainMenu.cpp">
+      <Filter>Games\DotsGame</Filter>
+    </ClCompile>
+    <ClCompile Include="RTCode\PrimitiveComposite.cpp">
+      <Filter>RTCode</Filter>
+    </ClCompile>
+    <ClCompile Include="RTCode\Games\Snake\Game_Snake.cpp">
+      <Filter>Games\SnakeGame</Filter>
+    </ClCompile>
+    <ClCompile Include="RTCode\PrimitivePlanes.cpp">
+      <Filter>RTCode</Filter>
+    </ClCompile>
+    <ClCompile Include="RTCode\Games\Snake\UISheet_Lost.cpp">
+      <Filter>Games\SnakeGame</Filter>
+    </ClCompile>
+    <ClCompile Include="PlatformDirectX\main.cpp">
+      <Filter>PlatformDirectX</Filter>
+    </ClCompile>
+    <ClCompile Include="PlatformDirectX\PlatformDirectX.cpp">
+      <Filter>PlatformDirectX</Filter>
+    </ClCompile>
+    <ClCompile Include="PlatformNACL\PlatformNaCl.cpp">
+      <Filter>PlatformNaCl</Filter>
+    </ClCompile>
+    <ClCompile Include="PackedTextures.cpp">
+      <Filter>Games</Filter>
+    </ClCompile>
+    <ClCompile Include="RTCode\Games\Snake\UISheet_SnakeGameUI.cpp">
+      <Filter>Games\SnakeGame</Filter>
+    </ClCompile>
+    <ClCompile Include="RTCode\Games\Snake\UISheet_SnakeIntroUI.cpp">
+      <Filter>Games\SnakeGame</Filter>
+    </ClCompile>
+    <ClCompile Include="RTCode\Games\Mandelbrot\Game_Mandelbrot.cpp">
+      <Filter>Games\Mandelbrot</Filter>
+    </ClCompile>
+    <ClCompile Include="RTCode\Games\Mandelbrot\UISheet_Mandelbrot.cpp">
+      <Filter>Games\Mandelbrot</Filter>
+    </ClCompile>
+    <ClCompile Include="RTCode\FixedPoint.cpp">
+      <Filter>RTCode</Filter>
+    </ClCompile>
+    <ClCompile Include="RTCode\Games\Dots2d\Game_Dots2d.cpp">
+      <Filter>Games\Dots2d</Filter>
+    </ClCompile>
+    <ClCompile Include="RTCode\Games\Dots2d\UISheet_Dots2dGameUI.cpp">
+      <Filter>Games\Dots2d</Filter>
+    </ClCompile>
+    <ClCompile Include="RTCode\Games\Dots2d\UISheet_Dots2dTitle.cpp">
+      <Filter>Games\Dots2d</Filter>
+    </ClCompile>
+    <ClCompile Include="RTCode\Games\Dots2d\NewAccountDialog.cpp">
+      <Filter>Games\Dots2d</Filter>
+    </ClCompile>
+    <ClCompile Include="RTCode\CommonUI\Dialog.cpp">
+      <Filter>CommonUI</Filter>
+    </ClCompile>
+    <ClCompile Include="RTCode\CommonUI\TextBox.cpp">
+      <Filter>CommonUI</Filter>
+    </ClCompile>
+    <ClCompile Include="RTCode\CommonUI\UIControl.cpp">
+      <Filter>CommonUI</Filter>
+    </ClCompile>
+    <ClCompile Include="RTCode\CommonUI\UIControl_ImageButton.cpp">
+      <Filter>CommonUI</Filter>
+    </ClCompile>
+    <ClCompile Include="RTCode\CommonUI\UIControl_TextButton.cpp">
+      <Filter>CommonUI</Filter>
+    </ClCompile>
+    <ClCompile Include="RTCode\CommonUI\UISheet.cpp">
+      <Filter>CommonUI</Filter>
+    </ClCompile>
+    <ClCompile Include="RTCode\CommonUI\UISheet_Menu.cpp">
+      <Filter>CommonUI</Filter>
+    </ClCompile>
+    <ClCompile Include="RTCode\CommonUI\UIStack.cpp">
+      <Filter>CommonUI</Filter>
+    </ClCompile>
+    <ClCompile Include="RTCode\CommonUI\StaticText.cpp">
+      <Filter>CommonUI</Filter>
+    </ClCompile>
+    <ClCompile Include="PlatformDirectX\LibcurlHTTP.cpp">
+      <Filter>PlatformDirectX</Filter>
+    </ClCompile>
+    <ClCompile Include="RTCode\CommonUI\MessageBox.cpp">
+      <Filter>CommonUI</Filter>
+    </ClCompile>
+    <ClCompile Include="RTCode\WebService.cpp">
+      <Filter>RTCode</Filter>
+    </ClCompile>
+    <ClCompile Include="RTCode\Games\Dots2d\ResetPasswordDialog.cpp">
+      <Filter>Games\Dots2d</Filter>
+    </ClCompile>
+    <ClCompile Include="RTCode\Games\Dots2d\UISheet_Dots2dBG.cpp">
+      <Filter>Games\Dots2d</Filter>
+    </ClCompile>
+    <ClCompile Include="RTCode\Games\Dots2d\UISheet_Dots2dLobby.cpp">
+      <Filter>Games\Dots2d</Filter>
+    </ClCompile>
+    <ClCompile Include="RTCode\CommonUI\UISheet_Loading.cpp">
+      <Filter>CommonUI</Filter>
+    </ClCompile>
+    <ClCompile Include="PlatformNACL\pong.cpp">
+      <Filter>PlatformNaCl</Filter>
+    </ClCompile>
+    <ClCompile Include="PlatformNACL\NaClHTTP.cpp">
+      <Filter>PlatformNaCl</Filter>
+    </ClCompile>
+    <ClCompile Include="PlatformNACL\geturl_handler.cpp">
+      <Filter>PlatformNaCl</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="RTCode\Games\Dots\Game_Dots.h">
+      <Filter>Games\DotsGame</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\DebugMenu.h">
+      <Filter>RTCode</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\AABB.h">
+      <Filter>RTCode</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\Camera.h">
+      <Filter>RTCode</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\CameraManager.h">
+      <Filter>RTCode</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\Game.h">
+      <Filter>RTCode</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\WorldCell.h">
+      <Filter>RTCode</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\PlatformBase.h">
+      <Filter>RTCode</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\PrimitiveBase.h">
+      <Filter>RTCode</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\PrimitiveBox.h">
+      <Filter>RTCode</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\PrimitiveSphere.h">
+      <Filter>RTCode</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\PrimitiveTriangle.h">
+      <Filter>RTCode</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\Ray.h">
+      <Filter>RTCode</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\RayCache.h">
+      <Filter>RTCode</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\RayTracer.h">
+      <Filter>RTCode</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\RTMath.h">
+      <Filter>RTCode</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\Scene.h">
+      <Filter>RTCode</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\SceneManager.h">
+      <Filter>RTCode</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\ScreenCell.h">
+      <Filter>RTCode</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\ScreenGrid.h">
+      <Filter>RTCode</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\Texture.h">
+      <Filter>RTCode</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\TextureManager.h">
+      <Filter>RTCode</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\Vec3.h">
+      <Filter>RTCode</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\Games\Dots\UISheet_GameUI.h">
+      <Filter>Games\DotsGame</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\CollisionInfo.h">
+      <Filter>RTCode</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\ObjectPool.h">
+      <Filter>RTCode</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\Matrix.h">
+      <Filter>RTCode</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\Games\Breakout\Game_Breakout.h">
+      <Filter>Games\BreakoutGame</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\GameBase.h">
+      <Filter>RTCode</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\Games\Tests\TestGames.h">
+      <Filter>Games\TestGames</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\Games\Dots\UISheet_MainMenu.h">
+      <Filter>Games\DotsGame</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\PrimitiveComposite.h">
+      <Filter>RTCode</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\Games\Snake\Game_Snake.h">
+      <Filter>Games\SnakeGame</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\PrimitivePlanes.h">
+      <Filter>RTCode</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\List.h">
+      <Filter>RTCode</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\StringBuffer.h">
+      <Filter>RTCode</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\Games\Snake\UISheet_Lost.h">
+      <Filter>Games\SnakeGame</Filter>
+    </ClInclude>
+    <ClInclude Include="PlatformDirectX\PlatformDirectX.h">
+      <Filter>PlatformDirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="PlatformNACL\PlatformNaCl.h">
+      <Filter>PlatformNaCl</Filter>
+    </ClInclude>
+    <ClInclude Include="PlatformNACL\pong.h">
+      <Filter>PlatformNaCl</Filter>
+    </ClInclude>
+    <ClInclude Include="PackedTextures.h">
+      <Filter>Games</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\Games\Snake\UISheet_SnakeGameUI.h">
+      <Filter>Games\SnakeGame</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\Games\Snake\UISheet_SnakeIntroUI.h">
+      <Filter>Games\SnakeGame</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\Games\Mandelbrot\Game_Mandelbrot.h">
+      <Filter>Games\Mandelbrot</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\Games\Mandelbrot\UISheet_Mandelbrot.h">
+      <Filter>Games\Mandelbrot</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\Defines.h">
+      <Filter>RTCode</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\FixedPoint.h">
+      <Filter>RTCode</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\Games\Dots2d\Game_Dots2d.h">
+      <Filter>Games\Dots2d</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\Games\Dots2d\UISheet_Dots2dGameUI.h">
+      <Filter>Games\Dots2d</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\Games\Dots2d\UISheet_Dots2dTitle.h">
+      <Filter>Games\Dots2d</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\Games\Dots2d\NewAccountDialog.h">
+      <Filter>Games\Dots2d</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\Callback.h">
+      <Filter>RTCode</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\CommonUI\Dialog.h">
+      <Filter>CommonUI</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\CommonUI\TextBox.h">
+      <Filter>CommonUI</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\CommonUI\UIControl.h">
+      <Filter>CommonUI</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\CommonUI\UIControl_ImageButton.h">
+      <Filter>CommonUI</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\CommonUI\UIControl_TextButton.h">
+      <Filter>CommonUI</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\CommonUI\UISheet.h">
+      <Filter>CommonUI</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\CommonUI\UISheet_Menu.h">
+      <Filter>CommonUI</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\CommonUI\UIStack.h">
+      <Filter>CommonUI</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\CommonUI\StaticText.h">
+      <Filter>CommonUI</Filter>
+    </ClInclude>
+    <ClInclude Include="PlatformDirectX\LibcurlHTTP.h">
+      <Filter>PlatformDirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\CommonUI\MessageBox.h">
+      <Filter>CommonUI</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\WebService.h">
+      <Filter>RTCode</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\Games\Dots2d\ResetPasswordDialog.h">
+      <Filter>Games\Dots2d</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\Games\Dots2d\UISheet_Dots2dBG.h">
+      <Filter>Games\Dots2d</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\Games\Dots2d\UISheet_Dots2dLobby.h">
+      <Filter>Games\Dots2d</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\CommonUI\UISheet_Loading.h">
+      <Filter>CommonUI</Filter>
+    </ClInclude>
+    <ClInclude Include="RTCode\FloatingPointExceptions.h">
+      <Filter>RTCode</Filter>
+    </ClInclude>
+    <ClInclude Include="PlatformNACL\NaClHTTP.h">
+      <Filter>PlatformNaCl</Filter>
+    </ClInclude>
+    <ClInclude Include="PlatformNACL\geturl_handler.h">
+      <Filter>PlatformNaCl</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="RTCode">
+      <UniqueIdentifier>{99afc15c-7523-4561-9934-661671152ccd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Games">
+      <UniqueIdentifier>{09141d01-7b78-4ef2-a6cd-0494a6b79a89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Games\SnakeGame">
+      <UniqueIdentifier>{aac5ae33-e864-463b-90e3-958a4e81757a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Games\DotsGame">
+      <UniqueIdentifier>{2f40052d-6839-4506-8cdf-9b7db183fd47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Games\BreakoutGame">
+      <UniqueIdentifier>{0d830a30-da74-45b7-8a38-aabe90b303b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Games\TestGames">
+      <UniqueIdentifier>{dfe3d4e0-e27c-412f-abf2-88f2ff923622}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PlatformNaCl">
+      <UniqueIdentifier>{dc8e6b39-48a4-4669-8f50-3483731d90ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PlatformDirectX">
+      <UniqueIdentifier>{ca16249a-608d-47ac-b596-0327120b03ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Games\Mandelbrot">
+      <UniqueIdentifier>{9b002e8e-8c8b-4e32-b08e-4a2ae487a1e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Games\Dots2d">
+      <UniqueIdentifier>{e1a259d9-940c-495c-852b-355659e0de56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CommonUI">
+      <UniqueIdentifier>{acb978e7-3c10-41f9-a65c-f77c26424c71}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PlatformNACL\pong.html">
+      <Filter>PlatformNaCl</Filter>
+    </None>
+  </ItemGroup>
+</Project>
