@@ -1,0 +1,333 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>MoriRT Snake</title>
+
+     <style type="text/css">
+          #myCanvas{z-index:1;position: fixed;}
+     </style>
+
+    <script type="text/javascript">
+
+        var i = 0;
+        var res = 0;
+        var context = null;
+        var total_width = 300;
+        var total_height = 34;
+        var initial_x = (500 - total_width) / 2;
+        var initial_y = (500 - total_height) / 2;
+        var radius = total_height/2;
+
+        window.onload = function() {
+            var elem = document.getElementById('myCanvas');
+            if (!elem || !elem.getContext) {
+                return;
+            }
+
+            context = elem.getContext('2d');
+            if (!context) {
+                return;
+            }
+
+            // set font
+            context.font = "16px Verdana";
+
+            // Blue gradient for progress bar
+            var progress_lingrad = context.createLinearGradient(0,initial_y+total_height,0,0);
+            progress_lingrad.addColorStop(0, '#002000');
+            progress_lingrad.addColorStop(0.4, '#00F000');
+            progress_lingrad.addColorStop(1, '#008000');
+            context.fillStyle = progress_lingrad;
+
+            //draw();
+
+            //res = setInterval(draw, 30);
+        }
+
+        function draw(percent, labeltext)
+        {
+            i=(percent * total_width) / 100;
+            // Clear everything before drawing
+            //context.clearRect(initial_x-5,initial_y-5,total_width+15,total_height+15);
+            context.clearRect(0,0,500,500);
+            progressLayerRect(context, initial_x, initial_y, total_width, total_height, radius);
+            progressBarRect(context, initial_x, initial_y, i, total_height, radius, total_width);
+            progressText(context, initial_x, initial_y, i, total_height, radius, total_width, labeltext );
+        }
+
+
+        /**
+         * Draws a rounded rectangle.
+         * @param {CanvasContext} ctx
+         * @param {Number} x The top left x coordinate
+         * @param {Number} y The top left y coordinate
+         * @param {Number} width The width of the rectangle
+         * @param {Number} height The height of the rectangle
+         * @param {Number} radius The corner radius;
+         */
+        function roundRect(ctx, x, y, width, height, radius) {
+            ctx.beginPath();
+            ctx.moveTo(x + radius, y);
+            ctx.lineTo(x + width - radius, y);
+            ctx.arc(x+width-radius, y+radius, radius, -Math.PI/2, Math.PI/2, false);
+            ctx.lineTo(x + radius, y + height);
+            ctx.arc(x+radius, y+radius, radius, Math.PI/2, 3*Math.PI/2, false);
+            ctx.closePath();
+            ctx.fill();
+        }
+
+        /**
+         * Draws a rounded rectangle.
+         * @param {CanvasContext} ctx
+         * @param {Number} x The top left x coordinate
+         * @param {Number} y The top left y coordinate
+         * @param {Number} width The width of the rectangle
+         * @param {Number} height The height of the rectangle
+         * @param {Number} radius The corner radius;
+         */
+        function roundInsetRect(ctx, x, y, width, height, radius) {
+            ctx.beginPath();
+            // Draw huge anti-clockwise box
+            ctx.moveTo(1000, 1000);
+            ctx.lineTo(1000, -1000);
+            ctx.lineTo(-1000, -1000);
+            ctx.lineTo(-1000, 1000);
+            ctx.lineTo(1000, 1000);
+            ctx.moveTo(x + radius, y);
+            ctx.lineTo(x + width - radius, y);
+            ctx.arc(x+width-radius, y+radius, radius, -Math.PI/2, Math.PI/2, false);
+            ctx.lineTo(x + radius, y + height);
+            ctx.arc(x+radius, y+radius, radius, Math.PI/2, 3*Math.PI/2, false);
+            ctx.closePath();
+            ctx.fill();
+        }
+
+        function progressLayerRect(ctx, x, y, width, height, radius) {
+            ctx.save();
+            // Set shadows to make some depth
+            ctx.shadowOffsetX = 2;
+            ctx.shadowOffsetY = 2;
+            ctx.shadowBlur = 5;
+            ctx.shadowColor = '#666';
+
+             // Create initial grey layer
+            ctx.fillStyle = 'rgba(189,189,189,1)';
+            roundRect(ctx, x, y, width, height, radius);
+
+            // Overlay with gradient
+            ctx.shadowColor = 'rgba(0,0,0,0)'
+            var lingrad = ctx.createLinearGradient(0,y+height,0,0);
+            lingrad.addColorStop(0, 'rgba(255,255,255, 0.1)');
+            lingrad.addColorStop(0.4, 'rgba(255,255,255, 0.7)');
+            lingrad.addColorStop(1, 'rgba(255,255,255,0.4)');
+            ctx.fillStyle = lingrad;
+            roundRect(ctx, x, y, width, height, radius);
+
+            ctx.fillStyle = 'white';
+            //roundInsetRect(ctx, x, y, width, height, radius);
+
+            ctx.restore();
+        }
+
+        /**
+         * Draws a half-rounded progress bar to properly fill rounded under-layer
+         * @param {CanvasContext} ctx
+         * @param {Number} x The top left x coordinate
+         * @param {Number} y The top left y coordinate
+         * @param {Number} width The width of the bar
+         * @param {Number} height The height of the bar
+         * @param {Number} radius The corner radius;
+         * @param {Number} max The under-layer total width;
+         */
+        function progressBarRect(ctx, x, y, width, height, radius, max) {
+            // var to store offset for proper filling when inside rounded area
+            var offset = 0;
+            ctx.beginPath();
+            if (width<radius) {
+                offset = radius - Math.sqrt(Math.pow(radius,2)-Math.pow((radius-width),2));
+                ctx.moveTo(x + width, y+offset);
+                ctx.lineTo(x + width, y+height-offset);
+                ctx.arc(x + radius, y + radius, radius, Math.PI - Math.acos((radius - width) / radius), Math.PI + Math.acos((radius - width) / radius), false);
+            }
+            else if (width+radius>max) {
+                offset = radius - Math.sqrt(Math.pow(radius,2)-Math.pow((radius - (max-width)),2));
+                ctx.moveTo(x + radius, y);
+                ctx.lineTo(x + width, y);
+                ctx.arc(x+max-radius, y + radius, radius, -Math.PI/2, -Math.acos((radius - (max-width)) / radius), false);
+                ctx.lineTo(x + width, y+height-offset);
+                ctx.arc(x+max-radius, y + radius, radius, Math.acos((radius - (max-width)) / radius), Math.PI/2, false);
+                ctx.lineTo(x + radius, y + height);
+                ctx.arc(x+radius, y+radius, radius, Math.PI/2, 3*Math.PI/2, false);
+            }
+            else {
+                ctx.moveTo(x + radius, y);
+                ctx.lineTo(x + width, y);
+                ctx.lineTo(x + width, y + height);
+                ctx.lineTo(x + radius, y + height);
+                ctx.arc(x+radius, y+radius, radius, Math.PI/2, 3*Math.PI/2, false);
+            }
+            ctx.closePath();
+            ctx.fill();
+
+            // draw progress bar right border shadow
+            if (width<max-1) {
+                ctx.save();
+                ctx.shadowOffsetX = 1;
+                ctx.shadowBlur = 1;
+                ctx.shadowColor = '#666';
+                if (width+radius>max)
+                  offset = offset+1;
+                ctx.fillRect(x+width,y+offset,1,total_height-offset*2);
+                ctx.restore();
+            }
+        }
+
+        /**
+         * Draws properly-positioned progress bar percent text
+         * @param {CanvasContext} ctx
+         * @param {Number} x The top left x coordinate
+         * @param {Number} y The top left y coordinate
+         * @param {Number} width The width of the bar
+         * @param {Number} height The height of the bar
+         * @param {Number} radius The corner radius;
+         * @param {Number} max The under-layer total width;
+         */
+        function progressText(ctx, x, y, width, height, radius, max, text) {
+            ctx.save();
+            ctx.fillStyle = 'white';
+            //var text = Math.floor(width/max*100)+"%";
+            var text_width = ctx.measureText(text).width;
+            var text_x = initial_x + radius;//x+width-text_width-radius/2;
+            //if (width<=radius+text_width) {
+            //text_x = x+radius/2;
+            //}
+            ctx.fillText(text, text_x, y+22);
+            ctx.restore();
+        }
+
+
+
+      var MoriRT = null;
+
+      function moduleDidStartLoad()
+      {
+        draw(0,"0%");
+      }
+
+      function moduleLoadProgress(event)
+      {
+        var loadPercent = 0.0;
+        var loadPercentString;
+        if (event.lengthComputable && event.total > 0)
+        {
+          loadPercent = Math.round(event.loaded / event.total * 100.0);
+          loadPercentString = loadPercent + '% (' + Math.round(event.loaded/1024) + 'KB / ' + Math.round(event.total/1024) + 'KB)';
+
+          //loadPercentString = loadPercent + '%';
+        }
+        else
+        {
+          // The total length is not yet known.
+          loadPercent = 0.0;
+          loadPercentString = "0%";
+        }
+
+        draw(loadPercent, loadPercentString);
+      }
+
+      function moduleLoadError()
+      {
+        document.getElementById('myCanvas').style.visibility = 'hidden';
+      }
+
+      function moduleLoadAbort()
+      {
+        document.getElementById('myCanvas').style.visibility = 'hidden';
+      }      
+
+      function moduleDidLoad()
+      {
+        document.getElementById('myCanvas').style.visibility = 'hidden';
+      }         
+
+      function moduleDidEndLoad()
+      {
+        document.getElementById('myCanvas').style.visibility = 'hidden';
+      }            
+
+ 
+
+      // Handle a message coming from the NaCl module.  The message payload is
+      // assumed to contain the current game score.  Update the score text
+      // display with this value.
+      // Note that errors are also sent to this handler.  A message starting
+      // with 'ERROR' is considered an error, all other strings are assumed
+      // to be scores.
+      function handleMessage(message_event) {
+        document.getElementById('error_log').textContent = message_event.data;
+        //alert(message_event.data);
+        /*
+        if (message_event.data.indexOf('ERROR') == 0)
+        {
+          document.getElementById('error_log').innerHTML = message_event.data;
+        }
+        else if (message_event.data.indexOf('SIZE:') == 0)
+        {
+          var size = message_event.data.split(" ");
+          document.getElementById('MoriRT').width=size[1];
+          document.getElementById('MoriRT').height=size[2];
+        }
+        else
+        {
+          //document.getElementById('score').innerHTML = message_event.data;
+        }
+        */
+      }
+
+    </script>
+  </head>
+  <body id="bodyId" onunload="pageDidUnload()" bgcolor="Black">
+    <!-- <h1>MoriRT Snake</h1> >
+    <!-- Load the published .nexe.  This includes the 'src' attribute which
+    shows how to load multi-architecture modules.  Each entry in the "nexes"
+    object in the .nmf manifest file is a key-value pair: the key is the
+    runtime ('x86-32', 'x86-64', etc.); the value is a URL for the desired NaCl
+    module.  To load the debug versions of your .nexes, set the 'src'
+    attribute to the _dbg.nmf version of the manifest file.
+
+    Note: The <EMBED> element is wrapped inside a <DIV>, which has both a 'load'
+    and a 'message' event listener attached.  This wrapping method is used
+    instead of attaching the event listeners directly to the <EMBED> element to
+    ensure that the listeners are active before the NaCl module 'load' event
+    fires.  This also allows you to use PPB_Messaging.PostMessage() (in C) or
+    pp::Instance.PostMessage() (in C++) from within the initialization code in
+    your NaCl module.
+    -->
+  <canvas id="myCanvas" width="500" height="500">Your browser does not have support for canvas.</canvas>
+
+
+    <div id="listener">
+      <script type="text/javascript">
+        var listener = document.getElementById('listener')
+        listener.addEventListener('message', handleMessage, true);
+
+        listener.addEventListener('loadstart', moduleDidStartLoad, true);
+        listener.addEventListener('progress', moduleLoadProgress, true);
+        listener.addEventListener('error', moduleLoadError, true);
+        listener.addEventListener('abort', moduleLoadAbort, true);
+        listener.addEventListener('load', moduleDidLoad, true);
+        listener.addEventListener('loadend', moduleDidEndLoad, true);        
+      </script>
+
+      <embed name="nacl_module"
+             id="MoriRT"
+             width=1000 height=1000
+             src="morirt.nmf"
+             type="application/x-nacl" />
+    </div>
+    <br />
+    <!--<p id="score"></p> -->
+    <pre id="error_log"></p>
+  </body>
+</html>

@@ -21,6 +21,6 @@ some global defines
 #define GAME_MANDELBROT 3
 #define GAME_DOTS2D 4
 
-#define FINALGAME GAME_DOTS2D
+#define FINALGAME GAME_SNAKE
 
 #define MRTARRAYSIZE(A) (sizeof(A) / sizeof(A[0]))

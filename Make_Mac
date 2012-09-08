@@ -1,3 +1,11 @@
+#find . -name "*.o" -delete
 make
-mv *.nexe ./PlatformNACL
 
+./../../toolchain/mac_x86_newlib/bin/x86_64-nacl-strip morirt_x86_32.nexe -o morirt_x86_32.nexe
+./../../toolchain/mac_x86_newlib/bin/x86_64-nacl-strip morirt_x86_64.nexe -o morirt_x86_64.nexe
+
+rm -fr bin
+mkdir bin
+mv *.nexe ./bin
+cp ./PlatformNACL/MoriRT.html ./bin
+cp ./PlatformNACL/morirt.nmf ./bin
