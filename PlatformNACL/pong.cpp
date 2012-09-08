@@ -4,7 +4,7 @@
 
 #include "pong.h"
 #include "platformnacl.h"
-#include "..\RTCode\RayTracer.h"
+#include "../RTCode/RayTracer.h"
 
 #include <stdio.h>
 #include <cmath>

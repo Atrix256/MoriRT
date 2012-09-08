@@ -11,7 +11,7 @@ NaCl platform stuff
 
 #define FORCE_SINGLE_THREADED 0
 
-#include "..\RTCode\PlatformBase.h"
+#include "../RTCode/PlatformBase.h"
 #include "pong.h"
 #include "PosixEvent.h"
 #include <vector>
