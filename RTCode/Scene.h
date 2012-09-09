@@ -16,6 +16,7 @@ The object that holds data about a scene
 #include "AABB.h"
 #include "WorldCell.h"
 #include "List.h"
+#include <string>
 
 //forward declarations
 class CPrimitiveBase;
@@ -55,7 +56,7 @@ public:
 
 	void RemovePrimitive(CPrimitiveBase *pPrimitive);
 
-	Vec3 GetColorForRay(CScreenCell &ScreenCell, int nRayIndex, Ray &ray, MRTFLOAT fRayRefractionIndex, int nBouncesAllowed, MRTFLOAT &fTimeTilFirstHit);
+	Vec3 GetColorForRay(bool bDebugThisRay, CScreenCell &ScreenCell, int nRayIndex, Ray &ray, MRTFLOAT fRayRefractionIndex, int nBouncesAllowed, MRTFLOAT &fTimeTilFirstHit);
 
 	void AddDirectionalLight(Vec3 vDirection, Vec3 vColor);
 
@@ -86,6 +87,8 @@ public:
 
 	AABB GetActualAABB();
 
+	const char *GetSceneDebugtext();
+
 private:
 
 	//this gets the primitive list for the specified cell
@@ -109,7 +112,7 @@ private:
 	Vec3 GetPointShadeFromLight(CScreenCell &ScreenCell, int nRayIndex, Vec3 &vPoint, void *pLightPrimitive, CPrimitiveBase *pIgnorePrimitive, bool bCanUseCachedData, Ray &ray, float fMaxLength = -1.0f);
 
 	//does a ray intersection against the scene using the grid
-	bool RayIntersects(CScreenCell &ScreenCell,int nRayIndex, Ray ray, CPrimitiveBase *&pClosestCollisionPrimitive, SCollisionInfo &CollisionInfo, bool bTestLights = true, CPrimitiveBase *pIgnorePrimitive = 0, MRTFLOAT fMaxDistance = -1.0f);
+	bool RayIntersects(bool bDebugThisRay, CScreenCell &ScreenCell,int nRayIndex, Ray ray, CPrimitiveBase *&pClosestCollisionPrimitive, SCollisionInfo &CollisionInfo, bool bTestLights = true, CPrimitiveBase *pIgnorePrimitive = 0, MRTFLOAT fMaxDistance = -1.0f);
 
 	//this holds all primitives in the scene
 	PrimitiveList m_PrimitiveList;
@@ -138,6 +141,8 @@ private:
 
 	//for debug rendering the world grid
 	PrimitiveList m_WorldGridPrimitives;
+
+	std::string m_SceneDebugText;
 };
 
 #endif //SCENE_H

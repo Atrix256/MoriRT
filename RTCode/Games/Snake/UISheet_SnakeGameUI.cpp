@@ -16,11 +16,13 @@ The functionality for the game UI in the snake game
 #include "../../CommonUI/UIControl_TextButton.h"
 #include "../../CommonUI/UIControl_ImageButton.h"
 #include "Game_Snake.h"
+#include "../../Scene.h"
 
 CUISheet_SnakeGameUI::CUISheet_SnakeGameUI()
 :m_bHasFocus(false)
 ,m_nScore(0)
 ,m_nHighScore(0)
+,m_pGameScene(NULL)
 {
 	m_pQualityLow = AddControl<CUIControl_ImageButton>();
 	m_pQualityLow->SetImageIdle("Assets/Snake/QualityLow_Idle.png");
@@ -70,6 +72,11 @@ CUISheet_SnakeGameUI::CUISheet_SnakeGameUI()
 	m_p3dMode->SetClickCallback(StaticOnClick3dMode,this);
 }
 
+void CUISheet_SnakeGameUI::SetScene(CScene *pScene)
+{
+	m_pGameScene = pScene;
+}
+
 CUISheet_SnakeGameUI::~CUISheet_SnakeGameUI()
 {
 }
@@ -88,10 +95,14 @@ void CUISheet_SnakeGameUI::Render(int nOffsetX, int nOffsetY, CUIStack *pUIStack
 	PlaceIcons();
 
 	int nTextHeight = pUIStack->GetTextHeight();
-
 	char szBuffer[256];
-	sprintf(szBuffer,"Score: %i",m_nScore);
-	pUIStack->RenderText(nTextHeight,nTextHeight,szBuffer,Vec3(1.0f,1.0f,1.0f),CUIStack::kAlignmentLeft);
+
+	#if PIXELDEBUG == true
+		pUIStack->RenderText(nTextHeight,nTextHeight,m_pGameScene->GetSceneDebugtext(),Vec3(1.0f,1.0f,1.0f),CUIStack::kAlignmentLeft);
+	#else
+		sprintf(szBuffer,"Score: %i",m_nScore);
+		pUIStack->RenderText(nTextHeight,nTextHeight,szBuffer,Vec3(1.0f,1.0f,1.0f),CUIStack::kAlignmentLeft);
+	#endif
 
 	sprintf(szBuffer,"High Score: %i",m_nHighScore);
 	Vec3 vColor;

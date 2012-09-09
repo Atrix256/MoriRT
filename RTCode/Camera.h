@@ -36,7 +36,7 @@ public:
 
 	void LookAt(Vec3 vCameraPos, Vec3 vCameraTarget, Vec3 vUp);
 
-	Vec3 GetColorForRay(CScreenCell &ScreenCell, unsigned int nRayCacheRayIndex, unsigned int nCameraRayIndex, int nMaxRayBounce);
+	Vec3 GetColorForRay(bool bDebugThisRay, CScreenCell &ScreenCell, unsigned int nRayCacheRayIndex, unsigned int nCameraRayIndex, int nMaxRayBounce);
 
 	void SetScene(CScene *pScene);
 

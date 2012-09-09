@@ -321,7 +321,7 @@ Vec3 CScene::GetPointShadeFromLight(CScreenCell &ScreenCell, int nRayIndex, Vec3
 
 			SCollisionInfo CollisionInfo;
 			CPrimitiveBase *pClosestPrimitive;
-			if(RayIntersects(ScreenCell,nRayIndex, ray, pClosestPrimitive, CollisionInfo, false, pIgnorePrimitive))
+			if(RayIntersects(false, ScreenCell,nRayIndex, ray, pClosestPrimitive, CollisionInfo, false, pIgnorePrimitive))
 			{
 				//if we haven't seen this primitive before
 				if(std::find(IntersectedPrimitives.begin(),IntersectedPrimitives.end(),pClosestPrimitive) == IntersectedPrimitives.end())
@@ -431,8 +431,12 @@ Vec3 CScene::GetPointShadeFromPointLight(CScreenCell &ScreenCell, int nRayIndex,
 	return GetPointShadeFromLight(ScreenCell,nRayIndex,vPoint,pLightPrimitive,pIgnorePrimitive,bCanUseCachedData,ray,fMaxLength);
 }
 
-Vec3 CScene::GetColorForRay(CScreenCell &ScreenCell, int nRayIndex, Ray &ray, MRTFLOAT fRayRefractionIndex, int nBouncesAllowed, MRTFLOAT &fTimeTilFirstHit)
+Vec3 CScene::GetColorForRay(bool bDebugThisRay, CScreenCell &ScreenCell, int nRayIndex, Ray &ray, MRTFLOAT fRayRefractionIndex, int nBouncesAllowed, MRTFLOAT &fTimeTilFirstHit)
 {
+	#if PIXELDEBUG == false
+		bDebugThisRay = false;
+	#endif
+
 	if(nRayIndex < 0)
 	{
 		return m_vBackgroundColor;
@@ -453,7 +457,7 @@ Vec3 CScene::GetColorForRay(CScreenCell &ScreenCell, int nRayIndex, Ray &ray, MR
 	fTimeTilFirstHit = -1;
 	if(pRayCacheItem->m_eCollisionStatus == SRayCacheItem::kCollisionUnknown || !bCanUseCachedData)
 	{
-		if(RayIntersects(ScreenCell,nRayIndex,ray,pRayCacheItem->m_pCollisionPrimitive,pRayCacheItem->m_CollisionInfo,false))
+		if(RayIntersects(bDebugThisRay,ScreenCell,nRayIndex,ray,pRayCacheItem->m_pCollisionPrimitive,pRayCacheItem->m_CollisionInfo,false))
 		{
 			pRayCacheItem->m_eCollisionStatus = SRayCacheItem::kCollisionHit;
 		}
@@ -517,7 +521,7 @@ Vec3 CScene::GetColorForRay(CScreenCell &ScreenCell, int nRayIndex, Ray &ray, MR
 
 			Ray RefractedRay = Ray(CollisionInfo.m_vCollisionPoint + vT * 0.01f,vT);
 
-			Vec3 vRefractedColor = GetColorForRay(ScreenCell,pRayCacheItem->m_nRefractionRay, RefractedRay, fRefractionIndex,nBouncesAllowed - 1,fTimeInsideOfShape);
+			Vec3 vRefractedColor = GetColorForRay(false, ScreenCell,pRayCacheItem->m_nRefractionRay, RefractedRay, fRefractionIndex,nBouncesAllowed - 1,fTimeInsideOfShape);
 
 			//calculate absorbance
 			Vec3 vLightAbsorbance = pClosestPrimitive->CalculateLightAbsorbance(fTimeInsideOfShape);
@@ -550,7 +554,7 @@ Vec3 CScene::GetColorForRay(CScreenCell &ScreenCell, int nRayIndex, Ray &ray, MR
 
 		//get the reflected color
 		MRTFLOAT fDummyTimeTilFirstHit;
-		Vec3 vReflectedColor = GetColorForRay(ScreenCell, pRayCacheItem->m_nReflectionRay,ReflectedRay,fRayRefractionIndex,nBouncesAllowed - 1,fDummyTimeTilFirstHit);
+		Vec3 vReflectedColor = GetColorForRay(false, ScreenCell, pRayCacheItem->m_nReflectionRay,ReflectedRay,fRayRefractionIndex,nBouncesAllowed - 1,fDummyTimeTilFirstHit);
 
 		//scale it by how much reflection there is
 		vReflectedColor = vReflectedColor * pClosestPrimitive->GetReflection();// * pClosestPrimitive->GetDiffuseColor(CollisionInfo.m_vCollisionPoint);
@@ -705,8 +709,17 @@ PrimitiveList *CScene::GetPrimitiveListForCell(int nX,int nY,int nZ)
 	}
 }
 
-bool CScene::RayIntersects(CScreenCell &ScreenCell,int nRayIndex, Ray ray, CPrimitiveBase *&pClosestCollisionPrimitive, SCollisionInfo &CollisionInfo, bool bTestLights /* = true*/, CPrimitiveBase *pIgnorePrimitive /* = 0*/, MRTFLOAT fMaxDistance /*= -1.0f*/)
+bool CScene::RayIntersects(bool bDebugThisRay, CScreenCell &ScreenCell,int nRayIndex, Ray ray, CPrimitiveBase *&pClosestCollisionPrimitive, SCollisionInfo &CollisionInfo, bool bTestLights /* = true*/, CPrimitiveBase *pIgnorePrimitive /* = 0*/, MRTFLOAT fMaxDistance /*= -1.0f*/)
 {
+	#if PIXELDEBUG == false
+		bDebugThisRay = false;
+	#else
+		if(bDebugThisRay)
+		{
+			m_SceneDebugText = "";
+		}
+	#endif
+
 	//do a ray vs AABB test to see if the ray hits the AABB, and also we can use this info to advance the ray to the beginning of the AABB
 	//for each axis
 	MRTFLOAT fRayMinTime = 0.0f;
@@ -722,7 +735,9 @@ bool CScene::RayIntersects(CScreenCell &ScreenCell,int nRayIndex, Ray ray, CPrim
 		{
 			//if the ray isn't in the box, bail out we know there's no intersection
 			if(ray.m_vPos[nIndex] < fAxisMin || ray.m_vPos[nIndex] > fAxisMax)
+			{
 				return false;
+			}
 		}
 		else
 		{
@@ -746,12 +761,15 @@ bool CScene::RayIntersects(CScreenCell &ScreenCell,int nRayIndex, Ray ray, CPrim
 
 			//if our time slice shrinks to below zero of a time window, we don't intersect
 			if(fRayMinTime > fRayMaxTime)
+			{
 				return false;
+			}
 		}
 	}
 
 	//advance the ray to the beginning of the AABB
-	ray.m_vPos += ray.m_vDir * fRayMinTime;
+	//for some reason this causes black pixels on macs, so not doing this
+	//ray.m_vPos += ray.m_vDir * fRayMinTime;
 
 	//init some vars
 	pClosestCollisionPrimitive = 0;
@@ -1051,6 +1069,11 @@ void CScene::AddDirectionalLight(Vec3 vDirection, Vec3 vColor)
 	NewLight.vDir.Normalize();
 
 	m_DirectionalLights.push_back(NewLight);
+}
+
+const char *CScene::GetSceneDebugtext()
+{
+	return m_SceneDebugText.c_str();
 }
 
 AABB CScene::GetActualAABB()

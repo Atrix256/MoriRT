@@ -118,6 +118,7 @@ void CGameSnake::Populate(int nScreenWidth, int nScreenHeight)
 	m_pBreakoutScene = SceneManager.AddScene(s_fWorldGridSize, Vec3(-0.1f,-0.1f,0.9f), Vec3(1.1f,1.1f,1.2f));
 	m_pBreakoutScene->SetAmbientLight(Vec3(0.0f,0.0f,0.0f));
 	m_pCamera->SetScene(m_pBreakoutScene);
+	m_pGameUI->SetScene(m_pBreakoutScene);
 
 	//create the board primitive
 	CPrimitiveBase *pPrimitive = m_pBreakoutScene->CreateBox(Vec3(0.5,0.5,1.05f),Vec3(1.0f,1.0f,0.1f));

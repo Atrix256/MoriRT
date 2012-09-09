@@ -1,0 +1,230 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"Purch",
+				"PurchaseXP"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"contents": "",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/data/nacl_sdk/pepper_21/examples/MoriRT/make_NaCl17.bat",
+		"/data/nacl_sdk/pepper_21/examples/MoriRT/Make_Mac",
+		"/data/zugs.git/ota-submodules/battlenations/2.2.0/config/Compositions.json",
+		"/data/battlenations.git/Game/Content/ota/2.2.0/config/Compositions.json",
+		"/Users/alanwolfe/Desktop/BattleNationLinks/MakeXibs",
+		"/Users/alanwolfe/Desktop/Z2DataEdit/ExampleData/ExampleData.plf",
+		"/data/zugs.git/src/main/resources/promos.json",
+		"/Users/alanwolfe/Documents/Strings2reg.json",
+		"/Users/alanwolfe/Documents/Strings2min.json",
+		"/Users/alanwolfe/Documents/Strings3.csv",
+		"/Users/alanwolfe/Documents/Strings2.csv",
+		"/Users/alanwolfe/Documents/Strings1.csv",
+		"/data/zugs.git/ota-submodules/battlenations/2.0.0/config/Compositions.json"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"},\n",
+			"morgan\"",
+			"morgan",
+			"radial",
+			"comp_pwrplant_wood_name",
+			"prereq",
+			"power",
+			"_long",
+			"inhours",
+			"maxLengthInHours",
+			"home",
+			"z2uihome",
+			"sGear",
+			"concrete",
+			"sgear",
+			"armyinte",
+			"p01_RAPTR_050_GetRaptor5",
+			"mis_p01_RAPTR_050_GetRaptor5_enc6",
+			"mis_p01_RAPTR_050_GetRaptor5_enc7",
+			"mis_p01_RAPTR_050_GetRaptor5_enc1",
+			"p01_RAPTR_050_GetRaptor5",
+			"spart",
+			"chem",
+			"checm",
+			"chem",
+			"resource",
+			"heart la",
+			"resourceIcons",
+			"heart",
+			"pop",
+			"currency",
+			"gold",
+			"iron",
+			"star",
+			"stars",
+			"version",
+			"promom",
+			"promo",
+			",\n",
+			"comp_civHouse_shelter",
+			"comp_civHouse\"",
+			"comp_civHouse",
+			"mis_p01_BIRTH_010_BirthdayJobs_60reward",
+			"shelter_desc",
+			"{\n",
+			"comp_civHouse_shelter"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"auto_name": "",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"replace":
+	{
+		"height": 0.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 202.0,
+	"status_bar_visible": true
+}

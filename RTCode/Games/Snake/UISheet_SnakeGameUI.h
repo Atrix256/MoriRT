@@ -15,6 +15,7 @@ The functionality for the game UI in the snake game
 class CTexture;
 class CUIControl_ImageButton;
 class CGameSnake;
+class CScene;
 
 class CUISheet_SnakeGameUI : public CUISheet
 {
@@ -30,6 +31,8 @@ public:
 	int GetQualitySetting() const {return m_nQualitySetting;}
 
 	virtual void Render(int nOffsetX, int nOffsetY, CUIStack *pUIStack);
+
+	void SetScene(CScene *pScene);
 
 protected:
 	void OnClickQualityLow();
@@ -71,6 +74,8 @@ protected:
 	CUIControl_ImageButton *m_p3dMode;
 
 	CGameSnake *m_pSnakeGame;
+
+	CScene *m_pGameScene;
 };
 
 #endif //UISHEET_SNAKEGAMEUI_H

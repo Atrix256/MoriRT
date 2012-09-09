@@ -13,6 +13,7 @@ The camera object
 #include "ScreenCell.h"
 #include "RayTracer.h"
 #include "Matrix.h"
+#include "PlatformBase.h"
 
 CCamera::CCamera(Vec3 vCameraPos, Vec3 vCameraTarget, Vec3 vUp, int nRenderWidth, int nRenderHeight, MRTFLOAT fFOV, MRTFLOAT fScreenRectSize, int nScreenGridCellCount, Vec3 v3dOffset, bool bChildCamera)
 :m_pScene(0)
@@ -196,8 +197,12 @@ void CCamera::Update()
 	}
 }
 
-Vec3 CCamera::GetColorForRay(CScreenCell &ScreenCell, unsigned int nRayCacheRayIndex, unsigned int nCameraRayIndex, int nMaxRayBounce)
+Vec3 CCamera::GetColorForRay(bool bDebugThisRay, CScreenCell &ScreenCell, unsigned int nRayCacheRayIndex, unsigned int nCameraRayIndex, int nMaxRayBounce)
 {
+	#if PIXELDEBUG == false
+		bDebugThisRay = false;
+	#endif
+	
 	//if no scene, return black
 	if(!m_pScene)
 	{
@@ -219,7 +224,7 @@ Vec3 CCamera::GetColorForRay(CScreenCell &ScreenCell, unsigned int nRayCacheRayI
 
 	//get the color for this ray from the scene, adding in the ambient light of the scene
 	MRTFLOAT fTimeTilFirstHit; //just a dummy parameter needed, but we could make a depth buffer at this point if we wanted to by storing the value in a buffer (or put it in the alpha channel or something)
-	return m_pScene->GetColorForRay(ScreenCell,nRayCacheRayIndex,m_pRays[nCameraRayIndex],1.0f,nMaxRayBounce,fTimeTilFirstHit);
+	return m_pScene->GetColorForRay(bDebugThisRay,ScreenCell,nRayCacheRayIndex,m_pRays[nCameraRayIndex],1.0f,nMaxRayBounce,fTimeTilFirstHit);
 }
 
 void CCamera::DirtyAllCachedData(void)
@@ -303,6 +308,16 @@ void CCamera::RenderCell(int nIndex, int nMaxRayBounce, ERenderMode eRenderMode,
 	unsigned int nCurrentRowCameraRayIndex = (nStartY * nScreenWidth + nStartX);
 	int nRayCacheRayIndex = 0;
 
+	#if PIXELDEBUG == true
+		int nMouseX, nMouseY;
+		if(eRenderMode == kRenderNormal)
+		{
+			CRayTracer::GetSingleton().GetPlatform().GetMousePosition(nMouseX,nMouseY);
+			nMouseX -= nStartX;
+			nMouseY -= nStartY;
+		}
+	#endif
+
 	for(int nIndexY = 0; nIndexY < nHeight; ++nIndexY)
 	{
 		unsigned char *pCurrentPixel = pCurrentRow;
@@ -310,8 +325,20 @@ void CCamera::RenderCell(int nIndex, int nMaxRayBounce, ERenderMode eRenderMode,
 
 		for(int nIndexX = 0; nIndexX < nWidth; ++nIndexX)
 		{
+			bool bDebugThisPixel = false;
+
+			#if PIXELDEBUG == true
+				if(eRenderMode == kRenderNormal)
+				{
+					if(nIndexX == nMouseX && nIndexY == nMouseY)
+					{
+						bDebugThisPixel = true;
+					}
+				}
+			#endif
+
 			//ask our camera for the color of this ray
-			Vec3 vRayColor = GetColorForRay(ScreenCell, nRayCacheRayIndex, nCurrentCameraRayIndex, nMaxRayBounce);
+			Vec3 vRayColor = GetColorForRay(bDebugThisPixel, ScreenCell, nRayCacheRayIndex, nCurrentCameraRayIndex, nMaxRayBounce);
 
 			//clamp colors
 			if(vRayColor.m_fX > 1.0f)
