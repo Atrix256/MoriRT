@@ -15,7 +15,7 @@ some global defines
 	#define MRTFLOAT_MAX FLT_MAX
 #endif
 
-#define PIXELDEBUG true
+#define PIXELDEBUG false
 
 #define GAME_NONE 0
 #define GAME_SNAKE 1
