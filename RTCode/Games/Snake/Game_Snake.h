@@ -71,6 +71,8 @@ private:
 	void ColorizeAllSnakeSpheres();
 	void SetSnakeSphereHeight(CPrimitiveBase *pSnakeBall);
 
+	bool UpdateCheatState(unsigned char nKey);
+
 	static Vec3 BlackWhiteGridTextureFunction(const SCollisionInfo &CollisionInfo, const CPrimitiveBase *pPrimitive, const Vec3 &vDiffuseColor);
 
 	Vec3 GameGridToWorld(int nCellX, int nCellY);

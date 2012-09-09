@@ -43,6 +43,8 @@ const int CGameSnake::s_nNumGameGridCellsY = (int)ceilf(1.0f / s_fGameGridCellSi
 
 CTexture *g_pGridTexture = 0;
 int g_nQualitySettings = 1;
+int g_nCheatScoreBuff = 0;
+int g_nCheatState = 0;
 
 CGameSnake::CGameSnake()
 {
@@ -97,6 +99,7 @@ void CGameSnake::Populate(int nScreenWidth, int nScreenHeight)
 	//create our game UI and tell it some info
 	m_pGameUI = CRayTracer::GetSingleton().GetUIStack().AddUISheetToTopOfStack<CUISheet_SnakeGameUI>();
 	m_pGameUI->SetScore(1);
+	g_nCheatScoreBuff = 0;
 	m_pGameUI->SetGamePointer(this);
 
 	m_pIntroDialog = CRayTracer::GetSingleton().GetUIStack().AddUISheetToTopOfStack<CUISheet_SnakeIntro>();
@@ -142,6 +145,7 @@ void CGameSnake::ResetGame()
 {
 	//set the score to 1
 	m_pGameUI->SetScore(1);
+	g_nCheatScoreBuff=0;
 
 	//make the game grid
 	m_eGameGrid.clear();
@@ -337,7 +341,7 @@ void CGameSnake::FixedUpdate()
 		SetSnakeSphereHeight(pPrimitive);
 
 		//set the new score
-		m_pGameUI->SetScore(m_SnakeBody.size());
+		m_pGameUI->SetScore(m_SnakeBody.size()+g_nCheatScoreBuff);
 	}
 	//else move the tail to the front
 	else
@@ -360,8 +364,91 @@ void CGameSnake::FixedUpdate()
 		m_nCurrentBodyHeadIndex= 0;
 }
 
+bool CGameSnake::UpdateCheatState(unsigned char nKey)
+{
+	switch(g_nCheatState)
+	{
+		case 0:
+		{
+			if(nKey == 'C')
+			{
+				g_nCheatState++;
+				return true;
+			}
+			else
+				g_nCheatState = 0;
+			break;
+		}
+		case 1:
+		{
+			if(nKey == 'H')
+			{
+				g_nCheatState++;
+				return true;
+			}
+			else
+				g_nCheatState = 0;
+			break;
+		}
+		case 2:
+		{
+			if(nKey == 'A')
+			{
+				g_nCheatState++;
+				return true;
+			}
+			else
+				g_nCheatState = 0;
+			break;
+		}
+		case 3:
+		{
+			if(nKey == 'N')
+			{
+				g_nCheatState++;
+				return true;
+			}
+			else
+				g_nCheatState = 0;
+			break;
+		}
+		case 4:
+		{
+			if(nKey == 'E')
+			{
+				g_nCheatState++;
+				return true;
+			}
+			else
+				g_nCheatState = 0;
+			break;
+		}
+		case 5:
+		{
+			if(nKey == 'L')
+			{
+				//set the new score
+				g_nCheatScoreBuff += 7000;
+				m_pGameUI->SetScore(m_SnakeBody.size()+g_nCheatScoreBuff);
+				g_nCheatState = 0;
+				return true;
+			}
+			
+			g_nCheatState = 0;
+			break;
+		}
+	}
+
+	return false;
+}
+
 void CGameSnake::OnKeyDown(unsigned char nKey)
 {
+	if(g_nCheatState != 0)
+	{
+		return;
+	}
+
 	//38 is up
 	if(nKey == 38)
 	{
@@ -433,49 +520,54 @@ void CGameSnake::OnKeyDown(unsigned char nKey)
 
 void CGameSnake::OnKeyUp(unsigned char nKey)
 {
-	//38 is up
-	if(nKey == 38)
+	if(g_nCheatState == 0)
 	{
-		m_bUpKeyPressed = false;
+		//38 is up
+		if(nKey == 38)
+		{
+			m_bUpKeyPressed = false;
+		}
+
+		//40 is down
+		if(nKey == 40)
+		{
+			m_bDownKeyPressed = false;
+		}
+
+		//37 is left
+		if(nKey == 37)
+		{
+			m_bLeftKeyPressed = false;
+		}
+
+		//39 is right
+		if(nKey == 39)
+		{
+			m_bRightKeyPressed = false;
+		}
+
+		if(nKey == 'W')
+		{
+			m_bWKeyPressed = false;
+		}
+
+		if(nKey == 'A')
+		{
+			m_bAKeyPressed = false;
+		}
+
+		if(nKey == 'S')
+		{
+			m_bSKeyPressed = false;
+		}
+
+		if(nKey == 'D')
+		{
+			m_bDKeyPressed = false;
+		}
 	}
 
-	//40 is down
-	if(nKey == 40)
-	{
-		m_bDownKeyPressed = false;
-	}
-
-	//37 is left
-	if(nKey == 37)
-	{
-		m_bLeftKeyPressed = false;
-	}
-
-	//39 is right
-	if(nKey == 39)
-	{
-		m_bRightKeyPressed = false;
-	}
-
-	if(nKey == 'W')
-	{
-		m_bWKeyPressed = false;
-	}
-
-	if(nKey == 'A')
-	{
-		m_bAKeyPressed = false;
-	}
-
-	if(nKey == 'S')
-	{
-		m_bSKeyPressed = false;
-	}
-
-	if(nKey == 'D')
-	{
-		m_bDKeyPressed = false;
-	}
+	UpdateCheatState(nKey);
 }
 
 Vec3 CGameSnake::BlackWhiteGridTextureFunction(const SCollisionInfo &CollisionInfo, const CPrimitiveBase *pPrimitive, const Vec3 &vDiffuseColor)
