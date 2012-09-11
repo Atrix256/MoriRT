@@ -97,7 +97,7 @@ void CUISheet_SnakeGameUI::Render(int nOffsetX, int nOffsetY, CUIStack *pUIStack
 	int nTextHeight = pUIStack->GetTextHeight();
 	char szBuffer[256];
 
-	#if PIXELDEBUG == true
+	#if PIXELDEBUG
 		pUIStack->RenderText(nTextHeight,nTextHeight,m_pGameScene->GetSceneDebugtext(),Vec3(1.0f,1.0f,1.0f),CUIStack::kAlignmentLeft);
 	#else
 		sprintf(szBuffer,"Score: %i",m_nScore);

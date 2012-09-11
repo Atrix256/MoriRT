@@ -199,7 +199,7 @@ void CCamera::Update()
 
 Vec3 CCamera::GetColorForRay(bool bDebugThisRay, CScreenCell &ScreenCell, unsigned int nRayCacheRayIndex, unsigned int nCameraRayIndex, int nMaxRayBounce)
 {
-	#if PIXELDEBUG == false
+	#if !PIXELDEBUG
 		bDebugThisRay = false;
 	#endif
 	
@@ -308,7 +308,7 @@ void CCamera::RenderCell(int nIndex, int nMaxRayBounce, ERenderMode eRenderMode,
 	unsigned int nCurrentRowCameraRayIndex = (nStartY * nScreenWidth + nStartX);
 	int nRayCacheRayIndex = 0;
 
-	#if PIXELDEBUG == true
+	#if PIXELDEBUG
 		int nMouseX, nMouseY;
 		if(eRenderMode == kRenderNormal)
 		{
@@ -327,7 +327,7 @@ void CCamera::RenderCell(int nIndex, int nMaxRayBounce, ERenderMode eRenderMode,
 		{
 			bool bDebugThisPixel = false;
 
-			#if PIXELDEBUG == true
+			#if PIXELDEBUG
 				if(eRenderMode == kRenderNormal)
 				{
 					if(nIndexX == nMouseX && nIndexY == nMouseY)

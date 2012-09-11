@@ -433,7 +433,7 @@ Vec3 CScene::GetPointShadeFromPointLight(CScreenCell &ScreenCell, int nRayIndex,
 
 Vec3 CScene::GetColorForRay(bool bDebugThisRay, CScreenCell &ScreenCell, int nRayIndex, Ray &ray, MRTFLOAT fRayRefractionIndex, int nBouncesAllowed, MRTFLOAT &fTimeTilFirstHit)
 {
-	#if PIXELDEBUG == false
+	#if !PIXELDEBUG
 		bDebugThisRay = false;
 	#endif
 
@@ -711,7 +711,7 @@ PrimitiveList *CScene::GetPrimitiveListForCell(int nX,int nY,int nZ)
 
 bool CScene::RayIntersects(bool bDebugThisRay, CScreenCell &ScreenCell,int nRayIndex, Ray ray, CPrimitiveBase *&pClosestCollisionPrimitive, SCollisionInfo &CollisionInfo, bool bTestLights /* = true*/, CPrimitiveBase *pIgnorePrimitive /* = 0*/, MRTFLOAT fMaxDistance /*= -1.0f*/)
 {
-	#if PIXELDEBUG == false
+	#if !PIXELDEBUG
 		bDebugThisRay = false;
 	#else
 		if(bDebugThisRay)

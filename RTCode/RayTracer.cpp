@@ -128,7 +128,7 @@ void CRayTracer::RenderFrame(MRTFLOAT fFrameTime)
 	//give the debug menu a chance to render what it wants to render
 	m_DebugMenu.UpdateAndRender(&m_UIStack,fFrameTime);
 
-	#if PIXELDEBUG == true
+	#if PIXELDEBUG
 	if(m_pCamera)
 	{
 		m_pCamera->DirtyAllCachedData();
